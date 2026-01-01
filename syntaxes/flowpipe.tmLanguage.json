@@ -1,0 +1,133 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "flowpipe-hcl",
+	"patterns": [
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#blocks"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#attributes"
+		},
+		{
+			"include": "#constants"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#support"
+		}
+	],
+	"repository": {
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.line.double-slash.flowpipe",
+					"match": "//.*$"
+				},
+				{
+					"name": "comment.line.number-sign.flowpipe",
+					"match": "#.*$"
+				},
+				{
+					"name": "comment.block.flowpipe",
+					"begin": "/\\*",
+					"end": "\\*/"
+				}
+			]
+		},
+		"blocks": {
+			"patterns": [
+				{
+					"name": "storage.type.flowpipe",
+					"match": "\\b(pipeline|step|trigger|param|output|credential|mod|var|local)\\b"
+				}
+			]
+		},
+		"attributes": {
+			"patterns": [
+				{
+					"name": "entity.other.attribute-name.flowpipe",
+					"match": "\\b(method|url|args|description|value)\\b(?=\\s*=)"
+				}
+			]
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.control.flowpipe",
+					"match": "\\b(if|for|in|return|error|throw)\\b"
+				},
+				{
+					"name": "keyword.other.flowpipe",
+					"match": "\\b(for_each|depends_on)\\b"
+				}
+			]
+		},
+		"constants": {
+			"patterns": [
+				{
+					"name": "constant.language.flowpipe",
+					"match": "\\b(true|false|null)\\b"
+				},
+				{
+					"name": "constant.numeric.flowpipe",
+					"match": "\\b\\d+(\\.\\d+)?\\b"
+				}
+			]
+		},
+		"strings": {
+			"patterns": [
+				{
+					"name": "string.quoted.double.flowpipe",
+					"begin": "\"",
+					"end": "\"",
+					"patterns": [
+						{
+							"name": "constant.character.escape.flowpipe",
+							"match": "\\\\."
+						},
+						{
+							"include": "#interpolation"
+						}
+					]
+				},
+				{
+					"name": "string.unquoted.heredoc.flowpipe",
+					"begin": "<<([a-zA-Z0-9_]+)",
+					"end": "^\\1$",
+					"patterns": [
+						{
+							"include": "#interpolation"
+						}
+					]
+				}
+			]
+		},
+		"interpolation": {
+			"name": "meta.embedded.line.flowpipe",
+			"begin": "\\$\\{",
+			"end": "\\}",
+			"patterns": [
+				{
+					"include": "$self"
+				}
+			]
+		},
+		"support": {
+			"patterns": [
+				{
+					"name": "support.function.flowpipe",
+					"match": "\\b(concat|timecmp|timeadd|timestamp|flatten|length|min|max|contains|keys|values|lookup|merge|range|format|jsonencode|jsondecode|base64encode|base64decode|try|can|coalesce|element|index|join|lower|upper|replace|split|substr|trim|uuid|uuidv5)\\b"
+				}
+			]
+		}
+	},
+	"scopeName": "source.flowpipe"
+}

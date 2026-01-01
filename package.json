@@ -1,0 +1,35 @@
+{
+  "name": "flowpipe-hcl",
+  "displayName": "flowpipe-hcl",
+  "description": "Flowpipe HCL Language Support",
+  "publisher": "Johannes Van Zijl",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.107.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "flowpipe",
+        "aliases": [
+          "flowpipe-hcl",
+          "flowpipe"
+        ],
+        "extensions": [
+          ".fp"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "flowpipe",
+        "scopeName": "source.flowpipe",
+        "path": "./syntaxes/flowpipe.tmLanguage.json"
+      }
+    ]
+  }
+}
