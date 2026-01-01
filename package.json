@@ -11,6 +11,10 @@
   "categories": [
     "Programming Languages"
   ],
+  "scripts": {
+    "package": "vsce package",
+    "build": "mkdir -p build && vsce package --out build/"
+  },
   "contributes": {
     "languages": [
       {
@@ -32,5 +36,8 @@
         "path": "./syntaxes/flowpipe.tmLanguage.json"
       }
     ]
+  },
+  "dependencies": {
+    "vsce": "^2.15.0"
   }
 }
